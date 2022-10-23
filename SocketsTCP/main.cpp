@@ -10,8 +10,6 @@
 #include <cstring>
 #include <unistd.h>
 
-
-
 int main(void)
 {
     int port_name = {0};
@@ -74,70 +72,3 @@ int main(void)
 
     return 0;
 }
-
-
-
-/*
-int main(void)
-{
-    int number_port(0);
-    int sock_tcp(0),othersock_tcp;
-
-    struct sockaddr_in serv_addr,clien_addr;
-    socklen_t t_clien;
-    char buffer[256];
-
-    sock_tcp=socket(AF_INET,SOCK_STREAM,0);
-
-    if(sock_tcp==-1){
-        std::cerr<<"Failed open conenct socket";
-          exit(1);
-    }
-
-    bzero((char*)&serv_addr,sizeof(serv_addr));
-
-    number_port=atoi("12345");
-
-    serv_addr.sin_family=AF_INET;
-    serv_addr.sin_addr.s_addr=INADDR_ANY; // get any addres
-    serv_addr.sin_port=htons(number_port);
-
-
-    if(bind(sock_tcp,(struct sockaddr*)&serv_addr,sizeof(serv_addr))<0){
-        std::cerr<<"Failed bind socket";
-        exit(1);
-    }
-
-    listen(sock_tcp,5);
-    t_clien=sizeof(clien_addr);
-
-    othersock_tcp=accept(sock_tcp,(struct sockaddr*)&clien_addr,&t_clien);
-
-    if(othersock_tcp==-1){
-        std::cerr<<"Failed accept to connect";
-         exit(1);
-    }
-
-    std::cout<<"Connect from"<<inet_ntoa(clien_addr.sin_addr)<<
-               " And port : "<<htons(clien_addr.sin_port)<<std::endl;
-
-
-    send(othersock_tcp,"Hello i'm server !",50,0);
-
-    bzero(buffer,256);
-
-    int n_read=read(othersock_tcp,buffer,256);
-
-    if(n_read<0){
-        std::cerr<<"Failed to read from othersock";
-         exit(1);
-    }
-
-    std::cout<<"Message from othersock: "<<buffer<<std::endl;
-
-    close(othersock_tcp);
-    close(sock_tcp);
-
-    return 0;
-}
-*/
