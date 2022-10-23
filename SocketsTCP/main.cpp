@@ -70,7 +70,7 @@ int main(void) {
     }
 
     if (_buffer[0] == 'E') {
-      std::cout << "Client queit of server !";
+      std::cout << "The client has left the server !";
       exit(1);
     }
 
