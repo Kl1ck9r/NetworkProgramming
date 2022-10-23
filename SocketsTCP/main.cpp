@@ -10,6 +10,7 @@
 #include <cstring>
 #include <unistd.h>
 
+
 int main(void)
 {
     int port_name = {0};
@@ -54,18 +55,23 @@ int main(void)
 
     std::cout<<"Connect from addr: "<<inet_ntoa(client_addr.sin_addr)
              <<"Port: "<<ntohs(client_addr.sin_port)<<std::endl;
+    
 
     char _buffer[256];
-    send(client_descript,"Hello, Welcome to server !",strlen(_buffer),0);
+    send(client_descript,"Hello, Welcome to server !\n",strlen(_buffer),0);
 
-    int _num=read(client_descript,_buffer,strlen(_buffer));
+    while(true){
+      bzero(_buffer,256);
+       int  _bytesRecv=read(client_descript,_buffer,256);
 
-    if(_num<0){
-        std::cerr<<"Failed to read of socket";
+      if(_bytesRecv<0){
+          std::cerr<<"Failed recv message from client !";
             exit(1);
-    }
+        }
 
-    std::cout<<"Message from client: "<<_buffer<<std::endl;
+      std::cout<<"Received "<<std::string(_buffer,0,_bytesRecv)<<std::endl;
+         send(client_descript,_buffer,_bytesRecv+1,0);
+    }
 
     close(client_descript);
     close(server_descript);
