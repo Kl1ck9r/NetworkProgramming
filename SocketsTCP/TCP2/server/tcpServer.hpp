@@ -21,10 +21,14 @@ public:
 
     tcpServer & operator=(tcpServer &&tcp) = default;
 
-    virtual  ~tcpServer() noexcept {  close(cl_descript);close(fd_descript);   }
+    virtual  ~tcpServer() noexcept
+    {  
+        close(cl_descript); 
+        close(fd_descript);  
+    }
 
 public:
-    void HandleMessage(const tcpServer &tcp);
+   void HandleMessage(const tcpServer &tcp);
 
    void Bind() const ;
 
@@ -43,7 +47,7 @@ private:
 
     int fd_descript;
     int cl_descript;
-    int _port =  12345 ;
+    const int _port = 12345 ;
 };
 
 
